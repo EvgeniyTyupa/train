@@ -9,7 +9,17 @@ const UserSchema = mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    image: {
+        type: String
+    },
+    verified: {
+        type: Boolean,
+        default: false
+    },
+    verification_code: {
+        type: String,
+    },
 });
 
-module.exports = mongoose.model('users', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

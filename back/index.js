@@ -12,10 +12,12 @@ app.use(bodyParser.json());
 //import Routes
 const authRoute = require('./routes/user');
 const trainsRoute = require('./routes/trains');
+const exerciseRoute = require('./routes/exercise');
 
 //Routes
 app.use('/api/auth', authRoute);
 app.use('/api/trains', trainsRoute);
+app.use('/api/exercise', exerciseRoute);
 
 
 mongoose.connect(keys.mongoURI, { 

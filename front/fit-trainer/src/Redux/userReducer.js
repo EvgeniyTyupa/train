@@ -32,7 +32,7 @@ export const login = (email, password) => {
         dispatch(setIsFetching(true));
         userApi.login(email, password)
         .then(data => {
-            dispatch(setAuthUserData(data));
+            
             dispatch(setIsFetching(false));
         })
     }
