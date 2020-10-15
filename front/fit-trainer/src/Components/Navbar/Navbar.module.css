@@ -9,7 +9,7 @@
     flex-direction: column;
     padding: 10px 15px;
     width: calc(100% - 30px);
-    height: calc(100% - 120px);
+    height: calc(100% - 20px);
     background-color: rgba(0, 0, 0, 0.7);
 }
 .header{
@@ -42,7 +42,7 @@
     font-weight: 300;
     text-decoration: none;
     width: calc(100% - 10px);
-    height: 50px;
+    height: 65px;
     display: flex;
     align-items: center;
     border-radius: 5px;
@@ -60,4 +60,20 @@
     width: 100%;
     height: 100px;
     background-color: #47abc1;
+}
+.userMenu{
+    position: fixed;
+    top: 30px;
+    right: 50px;
+    width: max-content;
+    display: flex;
+    align-items: center;
+}
+.userMenu img{
+    width: 25px;
+    cursor: pointer;
+}
+.userMenu span{
+    position: relative;
+    left: -30px;
 }

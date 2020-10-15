@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import classes from './Navbar.module.css';
 
@@ -6,18 +6,25 @@ import logo from '../../Assets/Images/logo192.png';
 import user_icon from '../../Assets/Images/user_icon.svg';
 
 const Navbar = (props) => {
-    useEffect(() => {
-
-    })
     return(
         <div className={classes.main}>
+            <div className={classes.userMenu}>
+                {props.email && <span>{props.email}</span>}
+                <img src={user_icon}/>
+
+                {props.isAuth &&
+                <div className={classes.dropdown}>
+                    <NavLink to={"/login"} onClick={()=>{props.logout()}}>Logout</NavLink>
+                </div>}
+
+            </div>
             <div className={classes.plenka}>
                 <div className={classes.header}>
                     <img src={logo}/>
                     <h1>FIT TRAINER</h1>
                 </div>
                 <div className={classes.menu}>
-                    {localStorage.token ?                        
+                    {props.isAuth ?                        
                         <div className={classes.links}>
                             <div className={classes.item}>
                                 <NavLink to="/dashboard" activeClassName={classes.active}>
@@ -26,19 +33,19 @@ const Navbar = (props) => {
                                 </NavLink>
                             </div>
                             <div className={classes.item}>
-                                <NavLink to="/excercise/add" activeClassName={classes.active}>
+                                <NavLink to="/addex" activeClassName={classes.active}>
                                     <img src={user_icon}/>
                                     New Excercise
                                 </NavLink>
                             </div>
                             <div className={classes.item}>
-                                <NavLink to="/excercise/edit" activeClassName={classes.active}>
+                                <NavLink to="/editex" activeClassName={classes.active}>
                                     <img src={user_icon}/>
                                     Edit Excercise
                                 </NavLink>
                             </div>
                             <div className={classes.item}>
-                                <NavLink to="/workout/add" activeClassName={classes.active}>
+                                <NavLink to="/addworkout" activeClassName={classes.active}>
                                     <img src={user_icon}/>
                                     New Workout
                                 </NavLink>
@@ -63,16 +70,11 @@ const Navbar = (props) => {
                                     <img src={user_icon}/>
                                     Sign Up
                                 </NavLink>
-                            </div>
-                            
-                        </div>
-                        
-                    }
-                    
+                            </div>                          
+                        </div> 
+                    } 
                 </div>
-                
             </div>
-            <div className={classes.foot}></div>
         </div>
     );
 }

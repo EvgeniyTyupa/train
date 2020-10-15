@@ -4,22 +4,24 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 const passport = require('passport');
+let cors = require('cors');
 require('dotenv/config');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
 
 //import Routes
 const authRoute = require('./routes/user');
-const trainsRoute = require('./routes/trains');
 const exerciseRoute = require('./routes/exercise');
+const workoutRoute = require('./routes/workout');
 
 //Routes
 app.use('/api/auth', authRoute);
-app.use('/api/trains', trainsRoute);
 app.use('/api/exercise', exerciseRoute);
+app.use('/api/workout', workoutRoute);
 
-
+//DB
 mongoose.connect(keys.mongoURI, { 
         useNewUrlParser: true,
         useUnifiedTopology: true

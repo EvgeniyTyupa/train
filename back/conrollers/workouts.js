@@ -4,9 +4,9 @@ const errorHandler = require('../utils/errorHandler');
 
 module.exports.addWorkout = async function(req, res){
     const workout = new Workout({
-        userId: req.body.userId,
+        userId: req.params.userId,
         exercises: req.body.exercises,
-        dates: req.body.dates
+        date: req.body.date
     });
     try{
         await workout.save();
@@ -18,7 +18,6 @@ module.exports.addWorkout = async function(req, res){
         errorHandler(res ,e);
     }
 }
-
 
 module.exports.getWorkouts = async function(req, res){
     try{
@@ -33,6 +32,35 @@ module.exports.getWorkouts = async function(req, res){
                 workouts: workouts
             });
         });
+    }catch(e){
+        errorHandler(res, e);
+    }
+}
+
+module.exports.updateWorkout = async function(req, res){
+    try{
+        const workout = await Workout.findById(req.param.id);
+        if(!workout) res.status(404).json({
+            message: 'Workout not found!'
+        });
+        Object.assign(workout, req.body);
+        workout.save();
+        res.status(201).json({
+            workout: workout
+        });
+    }catch(e){
+        errorHandler(res, e);
+    }
+}
+
+module.exports.deleteWorkout = async function(req, res){
+    try{
+        const workout = await Workout.findById(req.param.id);
+        if(!workout) res.status(404).json({
+            message: 'Workout not found!'
+        });
+        await workout.remove();
+        res.status(200).send({message: 'Success!'});
     }catch(e){
         errorHandler(res, e);
     }
