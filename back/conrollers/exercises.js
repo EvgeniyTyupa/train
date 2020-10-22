@@ -7,7 +7,7 @@ const errorHandler = require('../utils/errorHandler');
 module.exports.addExercise = async function(req, res){
     const exercise = new Exercise({
         title: req.body.title,
-        type_in: req.body.type_in,
+        measurement: req.body.measurement,
         userId: req.params.userId
     });
     try{
@@ -25,9 +25,10 @@ module.exports.getExercises = async function(req, res){
     try{
         await Exercise.find({userId: new ObjectId(req.params.userId)})
         .then((exercises) => {
-            if(exercises.length == 0){
+            if(exercises.length === 0){
                 return res.status(404).json({
-                    message: "No exercises."
+                    message: "No exercises.",
+                    exercises: []
                 })
             }
             res.status(200).json({
@@ -39,17 +40,16 @@ module.exports.getExercises = async function(req, res){
     }
 }
 
-module.exports.updateExercise = async function(req, res){
+module.exports.updateExercises = async function(req, res){
     try{
-        const exercise = await Exercise.findById(req.params.id);
-        if(!exercise) res.status(404).json({
-            message: 'Exercise not found!'
-        });
-        Object.assign(exercise, req.body);
-        exercise.save();
-        res.status(201).json({
-            exercise: exercise
-        });
+        let exercises = req.body.exercises;
+            for await (let ex of exercises) {
+                await Exercise.findById(ex._id).updateOne({title: ex.title, measurement: ex.measurement});
+            }
+        res.status(202).json({
+            message: 'Updated!',
+            exercises: exercises
+        });      
     }catch(e){
         errorHandler(res, e);
     }
@@ -64,8 +64,8 @@ module.exports.deleteExercise = async function(req, res){
 
         const workouts = await Workout.find({userId: new ObjectId(exercise.userId)});
         workouts.forEach(workout => {
-            workout.exercises.forEach((exercise, index) => {
-                if(exercise == req.params.id){
+            workout.exercises.map((ex, index) => {
+                if(ex.exercise == req.params.id){
                     workout.exercises.splice(index, 1);
                     workout.save();
                 }
@@ -79,3 +79,4 @@ module.exports.deleteExercise = async function(req, res){
         errorHandler(res, e);
     }
 }
+

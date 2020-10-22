@@ -10,12 +10,16 @@ const Navbar = (props) => {
         <div className={classes.main}>
             <div className={classes.userMenu}>
                 {props.email && <span>{props.email}</span>}
-                <img src={user_icon}/>
+                <div className={classes.menuApp}>
+                    <img src={user_icon} className={classes.user_icon}/>
+                    {props.isAuth &&
+                    <div className={classes.dropdown}>
+                        <NavLink to={"/login"} onClick={props.logout}>Logout</NavLink>
+                    </div>}
+                </div>
+                
 
-                {props.isAuth &&
-                <div className={classes.dropdown}>
-                    <NavLink to={"/login"} onClick={()=>{props.logout()}}>Logout</NavLink>
-                </div>}
+                
 
             </div>
             <div className={classes.plenka}>
@@ -45,13 +49,13 @@ const Navbar = (props) => {
                                 </NavLink>
                             </div>
                             <div className={classes.item}>
-                                <NavLink to="/addworkout" activeClassName={classes.active}>
+                                <NavLink to="/addwork" activeClassName={classes.active}>
                                     <img src={user_icon}/>
                                     New Workout
                                 </NavLink>
                             </div>
                             <div className={classes.item}>
-                                <NavLink to="/workout/edit" activeClassName={classes.active}>
+                                <NavLink to="/editwork" activeClassName={classes.active}>
                                     <img src={user_icon}/>
                                     Edit Workout
                                 </NavLink>

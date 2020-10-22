@@ -5,7 +5,7 @@ const ExerciseSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    type_in: {
+    measurement: {
         type: String,
         required: true
     },

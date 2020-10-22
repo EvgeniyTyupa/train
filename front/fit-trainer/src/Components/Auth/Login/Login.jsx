@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from '../Auth.module.css';
+import classes from '../../Common/Form.module.css';
 import { Field, reduxForm } from "redux-form";
 import { Redirect, Route } from 'react-router';
 import { Input } from '../../Common/FormsControls/FormsControls';
@@ -7,7 +7,7 @@ import { required, minPassCreator, isEmail } from '../../../Utils/validators';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import WindowHeader from '../../Common/WindowHeader/WindowHeader';
-import { login } from '../../../Redux/userReducer';
+import { login, setIsRedirectAfterSubmit } from '../../../Redux/userReducer';
 import Preloader from '../../Common/Preloader/Preloader';
 
 const minPassLength3 = minPassCreator(3);
@@ -53,6 +53,7 @@ const Login = (props) => {
         return <Redirect to={"/dashboard"}/>
     }
     if(props.isRedirectAfterSubmit){
+        props.setIsRedirectAfterSubmit(false);
         return <Redirect to={"/dashboard"}/>
     }
     return(
@@ -73,4 +74,7 @@ let mapStateToProps = (state) => ({
     isRedirectAfterSubmit: state.user.isRedirectAfterSubmit
 });
 
-export default connect(mapStateToProps, {login})(Login);
+export default connect(mapStateToProps, {
+    login,
+    setIsRedirectAfterSubmit
+})(Login);

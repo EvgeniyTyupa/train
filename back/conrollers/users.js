@@ -2,7 +2,10 @@ let passwordHash = require('password-hash');
 const jwt = require('jsonwebtoken');
 const keys = require('../config/keys');
 const errorHandler = require('../utils/errorHandler');
+const ObjectId = require('mongoose').Types.ObjectId;
 const User = require('../models/user');
+const Exercise = require('../models/exercise');
+const Workout = require('../models/workout');
 
 function getRandomCode(min, max){
     min = Math.ceil(min);
@@ -88,12 +91,16 @@ module.exports.me = async function(req, res){
             }
             var userId = decoded.userId;
             const user = await User.findById(userId);
+            const exercises = await Exercise.find({userId: new ObjectId(userId)});
+            const workouts = await Workout.find({userId: new ObjectId(userId)});
     
             res.status(200).json({
                 _id: user._id,
                 email: user.email,
                 verified: user.verified,
-                image: user.image
+                image: user.image,
+                exercises: exercises,
+                workouts: workouts
             });
         }else{
             return res.send(500);

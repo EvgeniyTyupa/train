@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import classes from '../Auth.module.css';
+import classes from '../../Common/Form.module.css';
 import { Field, reduxForm } from "redux-form";
 import { Input } from '../../Common/FormsControls/FormsControls';
 import { NavLink } from 'react-router-dom';

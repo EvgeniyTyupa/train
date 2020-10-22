@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from '../Auth.module.css';
+import classes from '../../Common/Form.module.css';
 import { Field, reduxForm } from "redux-form";
 import { Redirect, Route } from 'react-router';
 import { Input } from '../../Common/FormsControls/FormsControls';

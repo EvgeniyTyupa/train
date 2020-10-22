@@ -8,7 +8,7 @@ router.use(passport.authenticate('jwt', {session: false}));
 
 router.get('/:userId', controller.getExercises);
 router.post('/:userId', controller.addExercise);
-router.patch('/:id', controller.updateExercise);
+router.patch('/', controller.updateExercises);
 router.delete('/:id', controller.deleteExercise);
 
 module.exports = router;

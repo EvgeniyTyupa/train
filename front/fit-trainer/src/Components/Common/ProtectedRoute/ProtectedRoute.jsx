@@ -1,18 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
-const ProtectedRoute = (props) => {
+const ProtectedRoute = ({Component, isAuth}) => {
     return(
-        <Route path={props.path} render={()=>(
-            props.isAuth ? props.render()
+            isAuth ? <Component/>
             : <Redirect to={"/login"}/>
-        )}/>
     ); 
 }
 
 let mapStateToProps = (state) => ({
-    isAuth: state.user.isAuth
+    isStartData: state.user.isStartData,
 });
 
-export default connect(mapStateToProps, {})(ProtectedRoute);
+export default connect(mapStateToProps, null)(ProtectedRoute);

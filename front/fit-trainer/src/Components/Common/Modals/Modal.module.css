@@ -49,3 +49,11 @@
 .window p{
     align-self: center;
 }
+
+.main label{
+    color: white;
+    font-size: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 20px 25px;
+    border-radius: 5px;
+}

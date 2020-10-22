@@ -71,3 +71,13 @@
     align-self: center;
     text-align: center;
 }
+.selectOption{
+    font-size: 20px;
+}
+.field label{
+    position: absolute;
+    transform: translateY(-20px) translateX(5px);
+    font-size: 11px;
+    color: rgba(128, 128, 128, 0.7);
+
+}

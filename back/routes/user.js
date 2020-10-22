@@ -9,7 +9,7 @@ router.post('/register', controller.register);
 router.post('/login', controller.login);
 router.patch('/update/:userId', controller.update);
 router.patch('/verify', controller.verify);
-router.get('/me', passport.authenticate('jwt', {session: false}), controller.me);
+router.get('/me', controller.me);
 
 
 module.exports = router;

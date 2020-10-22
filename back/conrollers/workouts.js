@@ -25,7 +25,8 @@ module.exports.getWorkouts = async function(req, res){
         .then((workouts) => {
             if(workouts.length == 0){
                 return res.status(404).json({
-                    message: "No workouts."
+                    message: "No workouts.",
+                    workouts: []
                 });
             }
             res.status(200).json({

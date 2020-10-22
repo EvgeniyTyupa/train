@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './ModalAfterSubmit.module.css';
+import classes from './Modal.module.css';
 import { connect } from 'react-redux';
 import { setIsShowModal } from '../../../Redux/userReducer';
 import Aos from 'aos';

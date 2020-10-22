@@ -8,9 +8,11 @@
     height: 25px;
     width: 100%;
     font-size: 20px;
+    background-color: transparent;
 }
 .formControl input::placeholder{
     color: rgba(128, 128, 128, 0.7);
+    
 }
 .formControl.error input{
     border-bottom: 2px solid red; 
@@ -18,4 +20,18 @@
 }
 .formControl.error span{
     color: red;
+}
+.formControl select{
+    width: 100%;
+    outline: none;
+    cursor: pointer;
+    height: 25px;
+    border: none;
+    border-bottom: 1px solid gray;
+    background-color: transparent;
+    font-size: 20px;
+}
+.formControl.error select{
+    border-bottom: 2px solid red; 
+    margin-bottom: 5px;
 }
