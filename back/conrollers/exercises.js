@@ -63,14 +63,15 @@ module.exports.deleteExercise = async function(req, res){
         });
 
         const workouts = await Workout.find({userId: new ObjectId(exercise.userId)});
-        workouts.forEach(workout => {
-            workout.exercises.map((ex, index) => {
+        for await (let workout of workouts) {
+            for await (let ex of workout.exercises){
                 if(ex.exercise == req.params.id){
+                    let index = workout.exercises.indexOf(ex);
                     workout.exercises.splice(index, 1);
                     workout.save();
                 }
-            });
-        });
+            }
+        }
         
         await exercise.remove();
         

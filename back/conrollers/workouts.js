@@ -40,7 +40,7 @@ module.exports.getWorkouts = async function(req, res){
 
 module.exports.updateWorkout = async function(req, res){
     try{
-        const workout = await Workout.findById(req.param.id);
+        const workout = await Workout.findById(req.params.id);
         if(!workout) res.status(404).json({
             message: 'Workout not found!'
         });
@@ -50,6 +50,7 @@ module.exports.updateWorkout = async function(req, res){
             workout: workout
         });
     }catch(e){
+        console.log(e);
         errorHandler(res, e);
     }
 }

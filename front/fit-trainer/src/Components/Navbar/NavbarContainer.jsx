@@ -9,13 +9,14 @@ const NavbarContainer = (props) => {
         // localStorage.clear()
     },[]);
     return(
-        <Navbar email={props.email} logout={props.logout} isAuth={props.isAuth}/>
+        <Navbar email={props.email} logout={props.logout} isAuth={props.isAuth} image={props.image}/>
     );
 }
 
 let mapStateToProps = (state) => ({
     email: state.user.email,
-    isAuth: state.user.isAuth
+    isAuth: state.user.isAuth,
+    image: state.user.image
 });
 
 export default connect(mapStateToProps, {logout})(NavbarContainer);

@@ -20,7 +20,7 @@ const AddWorkoutContainer = (props) => {
     const [date, setDate] = useState();
     useEffect(()=>{
         props.getExercises(props.userId);
-        let date = props.match.params.date;
+        let date = props.selectedDate;
         setDate(date);
     },[props.isRedirectAfterSubmit]);
     const addExercise = (e) => {
@@ -113,6 +113,7 @@ const AddWorkoutContainer = (props) => {
         });
         console.log(date);
         let dateToSave = new Date(date);
+        console.log(dateToSave);
         dateToSave.setHours(12);
         if(countError === 0) props.addWorkout(props.userId, workout, dateToSave); 
     }
@@ -128,7 +129,9 @@ const AddWorkoutContainer = (props) => {
                 onChangeRepeats={onChangeRepeats}
                 addExercise={addExercise}
                 workout={workout}
-                exercises={props.exercises}/> 
+                exercises={props.exercises}
+                date={date}
+                isHaveWorkout={props.isHaveWorkout}/> 
         </>
        
     );
@@ -141,6 +144,8 @@ let mapStateToProps = (state) => ({
     isFetching: state.workouts.isFetching,
     userId: state.user._id,
     isFormSuccess: state.workouts.isFormSuccess,
+    selectedDate: state.workouts.selectedDate,
+    isHaveWorkout: state.workouts.isHaveWorkout
 });
 
 export default connect(mapStateToProps, {

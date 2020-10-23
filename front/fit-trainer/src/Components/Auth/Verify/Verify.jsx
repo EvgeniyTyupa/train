@@ -66,9 +66,6 @@ const Verify = (props) => {
     if(props.isAuth){
         return <Redirect to={"/dashboard"}/>
     }
-    if(props.isRedirectAfterSubmit){
-        return <Redirect to={"/dashboard"}/>
-    }
     return(
         <>
             {props.isFetching && <Preloader/>}
@@ -84,7 +81,6 @@ const Verify = (props) => {
 let mapStateToProps = (state) => ({
     isAuth: state.user.isAuth,
     isFetching: state.user.isFetching,
-    isRedirectAfterSubmit: state.user.isRedirectAfterSubmit
 })
 
 export default connect(mapStateToProps, {

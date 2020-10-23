@@ -51,9 +51,7 @@ module.exports.login = async function(req, res){
                 const token = jwt.sign({
                     email: candidate.email,
                     userId: candidate._id,
-                    verified: candidate.verified
                 }, keys.jwt, {expiresIn: 60 * 60});
-
                 if(candidate.verified){
                     res.status(200).json({
                         token: token
@@ -83,7 +81,8 @@ module.exports.login = async function(req, res){
 module.exports.me = async function(req, res){
     try{
         if (req.headers && req.headers.authorization) {
-            let token = req.headers.authorization.split(' ')[1], decoded;
+            let decoded;
+            let token = req.headers.authorization.split(' ')[1];
             try {
                 decoded = jwt.verify(token, keys.jwt);
             }catch(e) {
@@ -134,11 +133,12 @@ module.exports.verify = async function(req, res){
         if(!user.verified){
             if(user.verification_code == req.body.verification_code){
                 await user.updateOne({verified: true});
+                
                 const token = jwt.sign({
                     email: user.email,
                     userId: user._id,
-                    verified: user.verified
                 }, keys.jwt, {expiresIn: 60 * 60});
+                console.log("verify:" + token);
                 res.status(201).json({
                     message: 'Account activated!',
                     token: token

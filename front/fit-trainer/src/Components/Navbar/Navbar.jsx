@@ -3,7 +3,9 @@ import { NavLink } from 'react-router-dom';
 import classes from './Navbar.module.css';
 
 import logo from '../../Assets/Images/logo192.png';
-import user_icon from '../../Assets/Images/user_icon.svg';
+import user_icon from '../../Assets/Images/user_icon.png';
+import default_user_icon from '../../Assets/Images/user_icon.svg';
+import docs_icon from '../../Assets/Images/docs.png';
 
 const Navbar = (props) => {
     return(
@@ -11,7 +13,7 @@ const Navbar = (props) => {
             <div className={classes.userMenu}>
                 {props.email && <span>{props.email}</span>}
                 <div className={classes.menuApp}>
-                    <img src={user_icon} className={classes.user_icon}/>
+                    <img src={props.image ? props.image : default_user_icon} className={classes.user_icon}/>
                     {props.isAuth &&
                     <div className={classes.dropdown}>
                         <NavLink to={"/login"} onClick={props.logout}>Logout</NavLink>
@@ -32,31 +34,31 @@ const Navbar = (props) => {
                         <div className={classes.links}>
                             <div className={classes.item}>
                                 <NavLink to="/dashboard" activeClassName={classes.active}>
-                                    <img src={user_icon}/>
+                                    <img src={docs_icon}/>
                                     Dashboard
                                 </NavLink>
                             </div>
                             <div className={classes.item}>
                                 <NavLink to="/addex" activeClassName={classes.active}>
-                                    <img src={user_icon}/>
+                                    <img src={docs_icon}/>
                                     New Excercise
                                 </NavLink>
                             </div>
                             <div className={classes.item}>
                                 <NavLink to="/editex" activeClassName={classes.active}>
-                                    <img src={user_icon}/>
+                                    <img src={docs_icon}/>
                                     Edit Excercise
                                 </NavLink>
                             </div>
                             <div className={classes.item}>
                                 <NavLink to="/addwork" activeClassName={classes.active}>
-                                    <img src={user_icon}/>
+                                    <img src={docs_icon}/>
                                     New Workout
                                 </NavLink>
                             </div>
                             <div className={classes.item}>
                                 <NavLink to="/editwork" activeClassName={classes.active}>
-                                    <img src={user_icon}/>
+                                    <img src={docs_icon}/>
                                     Edit Workout
                                 </NavLink>
                             </div>

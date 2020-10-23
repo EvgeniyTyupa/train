@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { getProfile } from '../../../Redux/userReducer';
 
-const ProtectedRoute = ({Component, isAuth}) => {
+const ProtectedRoute = ({Component, isAuth, isStartData, getProfile}) => {
+    useEffect(()=>{
+        if(localStorage.usertoken && !isStartData){
+          getProfile();
+        }   
+    },[]);
     return(
             isAuth ? <Component/>
             : <Redirect to={"/login"}/>
@@ -11,6 +17,7 @@ const ProtectedRoute = ({Component, isAuth}) => {
 
 let mapStateToProps = (state) => ({
     isStartData: state.user.isStartData,
+    isAuth: state.user.isAuth
 });
 
-export default connect(mapStateToProps, null)(ProtectedRoute);
+export default connect(mapStateToProps, {getProfile})(ProtectedRoute);

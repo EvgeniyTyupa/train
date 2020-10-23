@@ -52,10 +52,6 @@ const Login = (props) => {
     if(props.isAuth){
         return <Redirect to={"/dashboard"}/>
     }
-    if(props.isRedirectAfterSubmit){
-        props.setIsRedirectAfterSubmit(false);
-        return <Redirect to={"/dashboard"}/>
-    }
     return(
         <>
             {props.isFetching && <Preloader/>}
@@ -71,10 +67,8 @@ const Login = (props) => {
 let mapStateToProps = (state) => ({
     isAuth: state.user.isAuth,
     isFetching: state.user.isFetching,
-    isRedirectAfterSubmit: state.user.isRedirectAfterSubmit
 });
 
 export default connect(mapStateToProps, {
     login,
-    setIsRedirectAfterSubmit
 })(Login);

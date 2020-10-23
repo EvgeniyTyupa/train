@@ -9,11 +9,24 @@ const EditWorkout = (props) => {
     if(props.workout) {
         workout = props.workout;
     }
+    let year, month, day;
+    if(props.selectedDate){
+        let date = new Date(props.selectedDate);
+        year = date.getFullYear();
+        month = date.getMonth()+1;
+        day = date.getDate();
+        console.log(year);
+    }
+        
+
     return(
         <div className={classes.main}>
             <h1>Edit Workout</h1>
             <div className={classes.window}>
                 <WindowHeader headerText={headerText}/>
+                {props.isHaveWorkout ? 
+                <>
+                <h3>Update workout on {day + "/" + month + "/" + year}</h3>
                 <form>
                     <button onClick={props.addExercise} disabled={props.exercises.length <= 0 && true} className={classes.windowBut}>ADD EXERCISE</button>
                     <div className={classes.content}>
@@ -33,7 +46,8 @@ const EditWorkout = (props) => {
                         }
                     </div>
                 </form>
-                <button className={classes.submitBut} onClick={props.updateWorkout}>UPDATE WORKOUT</button>
+                {workout.length > 0 && <button className={classes.submitBut} onClick={props.updateWorkout}>UPDATE WORKOUT</button>}
+                </> : <span>You don't have workout on this date.</span>}
             </div>
         </div>
     );

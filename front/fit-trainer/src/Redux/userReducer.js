@@ -2,6 +2,7 @@ import { userApi } from '../Api/api';
 import { stopSubmit } from 'redux-form';
 import { setExercisesData } from './exerciseReducer';
 import { setWorkoutsData } from './workoutReducer';
+import history from '../Utils/history';
 
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA';
 const SET_IS_FETCHING = 'SET_IS_FETCHING';
@@ -83,9 +84,7 @@ export const login = (email, password) => {
         userApi.login(email, password)
         .then(data => {
             localStorage.setItem('usertoken', data.token);
-            dispatch(setIsAuth(true));
-            dispatch(setIsRedirectAfterSubmit(true));
-            dispatch(setIsFetching(false));
+            dispatch([setIsAuth(true), setIsFetching(false)]);
         })
         .catch(err => {
             console.log({err});
@@ -103,9 +102,7 @@ export const register = (email, password) => {
         .then(data => {
             console.log('activation link: ' + data.link);
             console.log('code: ' + data.code);
-            dispatch(setServerMessage(data.message));
-            dispatch(setIsShowModal(true));
-            dispatch(setIsFetching(false));
+            dispatch([setServerMessage(data.message), setIsShowModal(true), setIsFetching(false)]);
         })
         .catch(err => {
             dispatch(setIsFetching(false));
@@ -139,10 +136,8 @@ export const verify = (email, verification_code) => {
         dispatch(setIsFetching(true));
         userApi.verify(email, verification_code)
         .then(data => {
-            dispatch(getProfile());
-            dispatch(setServerMessage(data.message));
-            dispatch(setIsRedirectAfterSubmit(true));
-            dispatch(setIsFetching(false));
+            localStorage.setItem('usertoken', data.token);
+            dispatch([setIsAuth(true), setServerMessage(data.message), setIsFetching(false)]);
         })
         .catch(err => {
             console.log({err});

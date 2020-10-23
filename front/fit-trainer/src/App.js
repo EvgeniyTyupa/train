@@ -17,11 +17,7 @@ import { connect } from 'react-redux';
 import { getProfile } from './Redux/userReducer';
 
 const App = (props) => {
-  useEffect(()=>{
-    if(localStorage.usertoken && !props.isStartData){
-      props.getProfile();
-    }   
-  },[]);
+  
   return(
     <Router history={history}>
         <div className='app'>
@@ -34,11 +30,11 @@ const App = (props) => {
                 <Route exact path="/login" render={()=><Login/>} key={"login"}/>
                 <Route exact path="/register" render={()=><Register/>} key={"register"}/>
                 <Route exact path="/verify" render={()=><Verify/>} key={"verify"}/>
-                <Route exact path="/dashboard" render={()=><ProtectedRoute Component={DashboardContainer} key={"dashboard"} isAuth={props.isAuth}/>}/>
-                <Route exact path="/addex" render={()=><ProtectedRoute Component={AddExercise} key={"addex"} isAuth={props.isAuth}/>}/>
-                <Route exact path="/editex" render={()=><ProtectedRoute Component={EditExercisesContainer} key={"editex"} isAuth={props.isAuth}/>}/>
-                <Route exact path="/addwork/:date?" render={()=><ProtectedRoute Component={AddWorkoutContainer} key={"addwork"} isAuth={props.isAuth}/>}/>
-                <Route exact path="/editwork/:workoutId?" render={()=><ProtectedRoute Component={EditWorkoutContainer} key={"editwork"} isAuth={props.isAuth}/>}/>
+                <Route exact path="/dashboard" render={()=><ProtectedRoute Component={DashboardContainer} key={"dashboard"} />}/>
+                <Route exact path="/addex" render={()=><ProtectedRoute Component={AddExercise} key={"addex"} />}/>
+                <Route exact path="/editex" render={()=><ProtectedRoute Component={EditExercisesContainer} key={"editex"} />}/>
+                <Route exact path="/addwork" render={()=><ProtectedRoute Component={AddWorkoutContainer} key={"addwork"} />}/>
+                <Route exact path="/editwork/:workoutId?" render={()=><ProtectedRoute Component={EditWorkoutContainer} key={"editwork"} />}/>
               </div>
             </Switch>
           </div>
@@ -50,11 +46,4 @@ const App = (props) => {
   )
 }
 
-let mapStateToProps = (state) => ({
-  isAuth: state.user.isAuth,
-  isStartData: state.user.isStartData
-})
-
-export default connect(mapStateToProps, {
-  getProfile
-})(App);
+export default App;

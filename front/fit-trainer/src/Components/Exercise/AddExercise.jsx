@@ -66,7 +66,7 @@ const AddEx = (props) => {
     }
     let options = props.measurements.map(measurement => {
         return(
-            <option value={measurement} className={classes.selectOption}>{measurement}</option>
+            <option value={measurement} className={classes.selectOption} key={measurement}>{measurement}</option>
         );
     });
     return(

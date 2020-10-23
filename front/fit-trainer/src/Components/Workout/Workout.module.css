@@ -45,7 +45,10 @@
     align-items: flex-start;
     
 }
-
+.window h3{
+    font-weight: 400;
+    color: #999999;
+}
 .submitBut{
     outline: none;
     cursor: pointer;

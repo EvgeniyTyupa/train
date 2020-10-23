@@ -39,7 +39,7 @@ const Dashboard = (props) => {
                 {props.isAvailableNewWorkout && 
                     <div className={classes.buttons}>
                         <NavLink to="/addex">ADD NEW EXERCISE</NavLink>
-                        <NavLink to={`/addwork/${props.selectedDate}`}>ADD NEW WORKOUT</NavLink>
+                        <NavLink to={`/addwork`}>ADD NEW WORKOUT</NavLink>
                     </div>}
                 {props.isAvailableEditWorkout && 
                     <div className={classes.buttons}>

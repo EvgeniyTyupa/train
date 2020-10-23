@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Dashboard from './Dashboard';
-import { getWorkouts } from '../../Redux/workoutReducer';
+import { getWorkouts, setSelectedDate, setSelectedWorkoutId, setIsHaveWorkout } from '../../Redux/workoutReducer';
 import { useState } from 'react';
 
 const DashboardContainer = (props) => {
     const [isAvailableNewWorkout, setIsAvailableNewWorkout] = useState(false);
-    const [isAvailableEditWorkout, setIsAvailableEditWorkout] = useState(false);
     const [selectedDate, setSelectedDate] = useState('');
-    const [workoutId, setWorkoutId] = useState('');
     useEffect(()=>{
         props.getWorkouts(props.userId);
         parseDatesFromWorkouts(props.workouts);
@@ -29,12 +27,14 @@ const DashboardContainer = (props) => {
     }
     const checkDate = (date) => {
         setSelectedDate(date);
+
         let today = new Date();
         let todayData = parseDate(today);
         let todayToCompare = new Date(todayData[0], todayData[1], todayData[2]);
 
         let selectedDate = new Date(date);
         let dateData = parseDate(selectedDate);
+        props.setSelectedDate(date);
         let selectedDayToCompare = new Date(dateData[0], dateData[1], dateData[2]);
         
         let isEqualsDates = false;
@@ -45,29 +45,31 @@ const DashboardContainer = (props) => {
             let workoutDateToCompare = new Date(workoutDateData[0], workoutDateData[1], workoutDateData[2]);
             
             if(workoutDateToCompare.getTime() === selectedDayToCompare.getTime()){
-                setIsAvailableEditWorkout(true);
+                props.setIsHaveWorkout(true);
                 setIsAvailableNewWorkout(false);
-                setWorkoutId(workout._id);
+
+                props.setSelectedWorkoutId(workout._id);
                 isEqualsDates = true;
             }
         })
 
-        if(!isEqualsDates)setIsAvailableEditWorkout(false);
+        if(!isEqualsDates) props.setIsHaveWorkout(false);
         if(selectedDayToCompare.getTime() >= todayToCompare.getTime() && !isEqualsDates){
             setIsAvailableNewWorkout(true);
         }
         if(selectedDayToCompare.getTime() < todayToCompare.getTime()){
             setIsAvailableNewWorkout(false);
-            setIsAvailableEditWorkout(false);
+            props.setIsHaveWorkout(false);
+            props.setSelectedDate(null);
         }
     }
     return(
         <>
             <Dashboard workouts={props.workouts} 
             checkDate={checkDate}
-            isAvailableEditWorkout={isAvailableEditWorkout}
+            isAvailableEditWorkout={props.isHaveWorkout}
             isAvailableNewWorkout={isAvailableNewWorkout}
-            workoutId={workoutId}
+            workoutId={props.selectedWorkoutId}
             selectedDate={selectedDate}/>
         </>
     );
@@ -75,9 +77,14 @@ const DashboardContainer = (props) => {
 
 let mapStateToProps = (state) => ({
     userId: state.user._id,
-    workouts: state.workouts.workouts
+    workouts: state.workouts.workouts,
+    isHaveWorkout: state.workouts.isHaveWorkout,
+    selectedWorkoutId: state.workouts.selectedWorkoutId
 });
 
 export default connect(mapStateToProps, {
-    getWorkouts
+    getWorkouts,
+    setSelectedDate,
+    setSelectedWorkoutId,
+    setIsHaveWorkout
 })(DashboardContainer);

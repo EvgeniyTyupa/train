@@ -3,34 +3,39 @@ import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
 import EditWorkout from './EditWorkout';
 import Preloader from '../../Common/Preloader/Preloader';
-import { updateWorkout } from '../../../Redux/workoutReducer';
 import ModalSuccess from '../../Common/Modals/ModalSuccess';
 import { getExercises } from '../../../Redux/exerciseReducer';
-import { getWorkouts, setWorkoutsData } from '../../../Redux/workoutReducer';
+import { getWorkouts, setWorkoutsData, updateWorkout } from '../../../Redux/workoutReducer';
 
 const EditWorkoutContainer = (props) => {
     const [workout, setWorkout] = useState([]);
-    let workoutId = "";
+
+    const workoutId = props.selectedWorkoutId;
+
     useEffect(()=>{
-        workoutId = props.match.params.workoutId;
+        props.getExercises(props.userId)
         if(!props.workouts && props.userId){
             props.getWorkouts(props.userId);
         }
         props.workouts.map(work => {
-            if(work._id == workoutId){
+            console.log(workoutId);
+            if(work._id === workoutId){
                 work.exercises.forEach(ex => {
                     props.exercises.forEach(exercise => {
+                        console.log(exercise._id + " == " + ex.exercise)
                         if(exercise._id == ex.exercise){
-                            console.log(exercise);
                             ex.exercise = exercise;
+                            
                         }
                     })
                 })
-                setWorkout(work.exercises);    
+                
+                setWorkout(work.exercises);
+                    
             }
         });
         
-    },[]);
+    },[props.selectedWorkoutId, props.userId]);
     const addExercise = (event) => {
         event.preventDefault();
         setWorkout([...workout, 
@@ -74,9 +79,13 @@ const EditWorkoutContainer = (props) => {
         event.preventDefault();
         
         let newWorkout = [...workout];
-        newWorkout.splice(workoutIndex, 1);
-
-        setWorkout(newWorkout);
+        if(newWorkout.length > 1){
+            newWorkout.splice(workoutIndex, 1);
+            setWorkout(newWorkout);
+        }else{
+            alert("You can't remove all exercises from workout!");
+        }
+        
     }
     const moveUpExercise = (event, workoutIndex) => {
         event.preventDefault();
@@ -102,12 +111,24 @@ const EditWorkoutContainer = (props) => {
         setWorkout(newWorkout);
     }
     const updateWorkout = (e) => {
-        console.log(workout);
+        let countError = 0;
+        workout.map(ex => {
+            if(ex.repeats == "" || ex.measurement == ""){
+                countError++;
+                alert("You must fill all fields!");
+            }
+            if(ex.repeats == 0 || ex.measurement == 0){
+                countError++;
+                alert("Can't set 0 repeats and measurements!");
+            }
+        });
+        
+        if(countError === 0 ) props.updateWorkout(workoutId, workout);
     }
-
+    console.log(workout);
     return(
         <>
-            {props.isFetching && <Preloader/> }
+            {props.isFetching ? <Preloader/> :
                 <EditWorkout updateWorkout={updateWorkout}
                 moveDownExercise={moveDownExercise}
                 moveUpExercise={moveUpExercise}
@@ -117,7 +138,11 @@ const EditWorkoutContainer = (props) => {
                 onChangeRepeats={onChangeRepeats}
                 addExercise={addExercise}
                 workout={workout}
-                exercises={props.exercises}/> 
+                exercises={props.exercises}
+                workoutId={workoutId}
+                selectedDate={props.selectedDate}
+                isHaveWorkout={props.isHaveWorkout}/> 
+            }
         </>
     );
 }
@@ -129,7 +154,10 @@ let mapStateToProps = (state) => ({
     isFetching: state.workouts.isFetching,
     userId: state.user._id,
     isFormSuccess: state.workouts.isFormSuccess,
-    workouts: state.workouts.workouts
+    workouts: state.workouts.workouts,
+    selectedWorkoutId: state.workouts.selectedWorkoutId,
+    selectedDate: state.workouts.selectedDate,
+    isHaveWorkout: state.workouts.isHaveWorkout
 });
 
 export default connect(mapStateToProps, {
