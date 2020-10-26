@@ -21,7 +21,6 @@ const EditWorkoutContainer = (props) => {
             if(work._id === workoutId){
                 work.exercises.forEach(ex => {
                     props.exercises.forEach(exercise => {
-                        console.log(exercise._id + " == " + ex.exercise)
                         if(exercise._id == ex.exercise){
                             ex.exercise = exercise;
                             

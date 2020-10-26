@@ -2,10 +2,9 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const keys = require('./config/keys');
 const passport = require('passport');
 let cors = require('cors');
-require('dotenv/config');
+require('dotenv').config();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -22,7 +21,7 @@ app.use('/api/exercise', exerciseRoute);
 app.use('/api/workout', workoutRoute);
 
 //DB
-mongoose.connect(keys.mongoURI, { 
+mongoose.connect(process.env.MONGO_URI, { 
         useNewUrlParser: true,
         useUnifiedTopology: true
     },() => 

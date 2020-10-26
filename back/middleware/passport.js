@@ -1,5 +1,4 @@
 const passport = require('passport');
-const keys = require('../config/keys');
 
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
@@ -8,7 +7,7 @@ const User = mongoose.model('User');
 
 const options = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: keys.jwt
+    secretOrKey: process.env.JWT
 }
 
 module.exports = passport => {

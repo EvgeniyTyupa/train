@@ -6,6 +6,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 const User = require('../models/user');
 const Exercise = require('../models/exercise');
 const Workout = require('../models/workout');
+require('dotenv').config();
 
 function getRandomCode(min, max){
     min = Math.ceil(min);
@@ -51,7 +52,7 @@ module.exports.login = async function(req, res){
                 const token = jwt.sign({
                     email: candidate.email,
                     userId: candidate._id,
-                }, keys.jwt, {expiresIn: 60 * 60});
+                }, process.env.JWT, {expiresIn: 60 * 60});
                 if(candidate.verified){
                     res.status(200).json({
                         token: token
@@ -84,7 +85,7 @@ module.exports.me = async function(req, res){
             let decoded;
             let token = req.headers.authorization.split(' ')[1];
             try {
-                decoded = jwt.verify(token, keys.jwt);
+                decoded = jwt.verify(token, process.env.JWT);
             }catch(e) {
                 return res.status(401).send({message: 'Unauthorized.'});
             }
@@ -137,7 +138,7 @@ module.exports.verify = async function(req, res){
                 const token = jwt.sign({
                     email: user.email,
                     userId: user._id,
-                }, keys.jwt, {expiresIn: 60 * 60});
+                }, process.env.JWT, {expiresIn: 60 * 60});
                 console.log("verify:" + token);
                 res.status(201).json({
                     message: 'Account activated!',
