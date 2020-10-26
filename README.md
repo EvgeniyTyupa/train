@@ -6,4 +6,4 @@ APP Fit-Trainer
 - в папке back создать папку config и создать в ней файл keys.js
   
 Запуск приложения: 
-- в консоли, из 2 папок, front и back, прописать команду nmp start.
+- в консоли, из 2 папок, front и back, прописать команду npm start.
