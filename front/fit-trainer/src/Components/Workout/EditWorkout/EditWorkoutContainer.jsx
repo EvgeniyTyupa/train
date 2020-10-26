@@ -18,7 +18,6 @@ const EditWorkoutContainer = (props) => {
             props.getWorkouts(props.userId);
         }
         props.workouts.map(work => {
-            console.log(workoutId);
             if(work._id === workoutId){
                 work.exercises.forEach(ex => {
                     props.exercises.forEach(exercise => {
@@ -63,6 +62,11 @@ const EditWorkoutContainer = (props) => {
         let workoutIndex = event.target.getAttribute('index');
         let repeats = event.target.value;
 
+        let rep = /[-\.`$#@!%^&*()=;":'a-zA-Zа-яА-Я]/; 
+        if (rep.test(repeats)) { 
+            repeats = repeats.replace(rep, ''); 
+        } 
+
         const newWorkout = [...workout];
         newWorkout[workoutIndex].repeats = repeats;
         setWorkout(newWorkout);
@@ -70,6 +74,11 @@ const EditWorkoutContainer = (props) => {
     const onChangeMeasurement = (event) => {
         let workoutIndex = event.target.getAttribute('index');
         let measurement = event.target.value;
+
+        let rep = /[-\.`$#@!%^&*()=;":'a-zA-Zа-яА-Я]/; 
+        if (rep.test(measurement)) { 
+            measurement = measurement.replace(rep, ''); 
+        }
 
         const newWorkout = [...workout];
         newWorkout[workoutIndex].measurement = measurement;
@@ -125,7 +134,6 @@ const EditWorkoutContainer = (props) => {
         
         if(countError === 0 ) props.updateWorkout(workoutId, workout);
     }
-    console.log(workout);
     return(
         <>
             {props.isFetching ? <Preloader/> :

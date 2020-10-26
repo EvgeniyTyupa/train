@@ -25,3 +25,43 @@
     font-weight: 600;
     color: #777689;
 }
+
+
+@media screen and (max-width: 1024px){
+    .navside{
+      width: 25%;
+    }
+    .menu{
+        width: 75%;
+    }
+    .link{
+        width: 120px;
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 768px){
+    .navside{
+        display: none;
+    }
+    .menu{
+        width: 100%;
+        justify-content: space-around;
+        padding: 0;
+    }
+}
+@media screen and (max-width: 568px){
+    .navside{
+        display: none;
+    }
+    .menu{
+        width: 100%;
+        justify-content: space-around;
+        padding: 0;
+        flex-wrap: wrap;
+    }
+    .link{
+        font-size: 12px;
+        width: max-content;
+        
+    }
+}

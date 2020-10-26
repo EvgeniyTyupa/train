@@ -7,7 +7,6 @@ const Exercise_Item = (props) => {
     let options = props.exercises.map((ex, idx) => {
         return <option value={ex._id} index={props.index} key={shortid.generate()} selected={ex._id === props.currentEx.exercise._id}>{ex.title}</option>
     });
-    console.log(props.currentEx);
     return(
         <div className={classes.main}>
             <div className={classes.field}>

@@ -19,10 +19,6 @@ const Navbar = (props) => {
                         <NavLink to={"/login"} onClick={props.logout}>Logout</NavLink>
                     </div>}
                 </div>
-                
-
-                
-
             </div>
             <div className={classes.plenka}>
                 <div className={classes.header}>

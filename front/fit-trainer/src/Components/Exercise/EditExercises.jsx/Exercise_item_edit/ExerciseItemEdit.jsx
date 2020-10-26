@@ -13,7 +13,7 @@ const ExerciseItemEdit = (props) => {
         <div className={classes.main}>
             <div className={classes.field}>
                 <label>Exercise name</label>
-                <input value={props.currentEx.title} index={props.index} onChange={e => props.onChangeTitleExercise(e, props.index)}/>
+                <input value={props.currentEx.title} index={props.index} onChange={e => props.onChangeTitleExercise(e, props.index)}/> 
             </div>
             <div className={classes.field}>
                 <label>Measurement type</label>

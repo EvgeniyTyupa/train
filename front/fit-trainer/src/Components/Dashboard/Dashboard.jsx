@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import classes from './Dashboard.module.css';
 import InfiniteCalendar, { 
     Calendar, 
@@ -6,10 +6,10 @@ import InfiniteCalendar, {
 import 'react-infinite-calendar/styles.css';
 import { withProps } from 'recompose';
 import { NavLink } from 'react-router-dom';
+import { useLayoutEffect } from 'react';
 
 let today = new Date();
 let lastDay = new Date(today.getFullYear(), today.getMonth(), today.getDay());
-console.log(lastDay);
 
 
 const enhanceDay = highlighted => withProps(props => ({
@@ -21,11 +21,19 @@ const withHighlightedDates = withProps(({highlighted, DayComponent}) => ({
 }));
 
 const Dashboard = (props) => {
+    const [size, setSize] = useState([0,0]);
+    useLayoutEffect(()=>{
+        function updateSize(){
+            setSize([window.innerWidth, window.innerHeight]);
+        }
+        window.addEventListener('resize', updateSize);
+        updateSize();
+        return () => window.removeEventListener('resize', updateSize);
+    },[]);
     let dates = [];
     props.workouts.map(workout => {
         dates.push(workout.date.split('T')[0]);
     })
-
     useEffect(()=>{
         let today = new Date();
         props.checkDate(today);
@@ -47,8 +55,8 @@ const Dashboard = (props) => {
                         <NavLink to={`/editwork/${props.workoutId}`}>EDIT WORKOUT</NavLink>
                     </div>}
                 <InfiniteCalendar 
-                    width={"40%"}
-                    height={450}
+                    width={size[0] <= 1024 ? "100%" : "60%"}
+                    height={size[0] <= 568 ? 300 : 380}
                     selected={today}
                     onSelect={date => props.checkDate(date)}
                     Component={withDateSelection(withHighlightedDates(Calendar))}

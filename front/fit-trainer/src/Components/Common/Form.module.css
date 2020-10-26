@@ -81,3 +81,27 @@
     color: rgba(128, 128, 128, 0.7);
 
 }
+
+@media screen and (max-width: 1024px){
+    .window{
+        width: calc(75% - 40px);
+    }
+}
+@media screen and (max-width: 768px){
+    .window{
+        width: calc(100% - 40px);
+    }
+}
+@media screen and (max-width: 375px){
+    .window{
+        margin-top: 45px;
+    }
+    .field{
+        margin-top: 25px;
+    }
+    .form button{
+        width: 92%;
+        margin-top: 25px;
+        padding: 12px 30px;
+    }
+}

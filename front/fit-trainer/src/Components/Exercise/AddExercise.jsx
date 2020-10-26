@@ -33,7 +33,7 @@ class AddExForm extends React.Component {
                     </div>
                     <div className={classes.field}>
                         <label>Measurement type</label>
-                        <Field component={Select} name={"measurement"} defaultValue
+                        <Field component={Select} name={"measurement"}
                             validate={[required]}>
                                 {this.props.options}
                         </Field>

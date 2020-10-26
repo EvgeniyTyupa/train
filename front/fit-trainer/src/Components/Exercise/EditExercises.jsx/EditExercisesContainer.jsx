@@ -8,8 +8,6 @@ import Preloader from '../../Common/Preloader/Preloader';
 const EditExercisesContainer = (props) => {
     useEffect(()=>{
         if(props.userId) props.getExercises(props.userId);
-        
-        console.log(props.exercises);
     },[]);    
     const onChangeTitleExercise = (event, exerciseIndex) => {
         let title = event.target.value;

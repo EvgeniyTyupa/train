@@ -4,8 +4,11 @@ export const required = (value) => {
 }
 
 export const isEmail = (value) => {
-    if(value.includes("@")) return undefined;
-    return 'Email must contain @ symbol!';
+    let rep = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    if(rep.test(value)){
+        return undefined;
+    }
+    return 'Email is not valid!';   
 }
 export const minLengthCreator = (minLength) => (value) => {
     if(value.length < minLength) return `Minimum length of field ${minLength} symbols`;

@@ -35,3 +35,20 @@
     border-bottom: 2px solid red; 
     margin-bottom: 5px;
 }
+
+@media screen and (max-width: 1024px){
+    .formControl{
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 568px){
+    .formControl{
+        width: 90%;
+    }
+}
+@media screen and (max-width: 375px){
+    .formControl input{
+        font-size: 14px;
+    }
+}

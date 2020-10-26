@@ -13,7 +13,8 @@
     flex-direction: column;
     height: 50px;
     align-items: flex-start;
-    width: 180px;
+    width: 145px;
+    justify-content: space-between;
 }
 .field label{
     font-size: 11px;
@@ -80,4 +81,44 @@
 .removeBut img{
     color: white;
     width: 23px;
+}
+.inputBlock{
+    display: flex;
+}
+.buttonArrows button{
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+@media screen and (max-width: 1024px){
+    .buttons button{
+        width: 55px;
+    }
+    .buttons{
+        width: 200px;
+    }
+    .field{
+        height: 40px;
+        width: 120px;
+    }
+}
+@media screen and (max-width: 768px){
+    .buttons{
+        display: flex;
+        flex-direction: column;
+        height: 150px;
+        width: 50px;
+        align-items: flex-end;
+    }
+    .field{
+        height: 40px;
+        width: 100px;
+    }
+    .buttons button{
+        width: 45px;
+    }
+    .main span{
+        font-size: 16px;
+    }
 }

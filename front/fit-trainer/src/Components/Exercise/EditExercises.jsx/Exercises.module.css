@@ -68,3 +68,8 @@
     overflow-x: hidden;
     max-height: 45vh;
 }
+@media screen and (max-width: 768px){
+    .window{
+        width: calc(100% - 40px);
+    }
+}

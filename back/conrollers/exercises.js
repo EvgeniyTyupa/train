@@ -43,9 +43,9 @@ module.exports.getExercises = async function(req, res){
 module.exports.updateExercises = async function(req, res){
     try{
         let exercises = req.body.exercises;
-            for await (let ex of exercises) {
-                await Exercise.findById(ex._id).updateOne({title: ex.title, measurement: ex.measurement});
-            }
+        for await (let ex of exercises) {
+            await Exercise.findById(ex._id).updateOne({title: ex.title, measurement: ex.measurement});
+        }
         res.status(202).json({
             message: 'Updated!',
             exercises: exercises

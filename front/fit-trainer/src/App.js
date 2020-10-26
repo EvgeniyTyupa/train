@@ -25,8 +25,10 @@ const App = (props) => {
             <div className='menu'>
               <NavbarContainer/>
             </div>
-            <Switch>
               <div className='wrap-content'>
+                <Route exact path="/">
+                  <Redirect to="/dashboard"/>
+                </Route>
                 <Route exact path="/login" render={()=><Login/>} key={"login"}/>
                 <Route exact path="/register" render={()=><Register/>} key={"register"}/>
                 <Route exact path="/verify" render={()=><Verify/>} key={"verify"}/>
@@ -36,7 +38,6 @@ const App = (props) => {
                 <Route exact path="/addwork" render={()=><ProtectedRoute Component={AddWorkoutContainer} key={"addwork"} />}/>
                 <Route exact path="/editwork/:workoutId?" render={()=><ProtectedRoute Component={EditWorkoutContainer} key={"editwork"} />}/>
               </div>
-            </Switch>
           </div>
           <div className="footer">
             <Footer/>

@@ -24,3 +24,26 @@
     font-weight: 200;
     margin-top: 8px;
 }
+
+
+@media screen and (max-width: 568px){
+    .header h2{
+        font-size: 18px;
+    }
+    .header span{
+        font-size: 14px;
+    }
+    .header{
+        padding-right: 15px;
+        width: calc(100% - 30px);
+    }
+}
+
+@media screen and (max-width: 375px){
+    .header h2{
+        font-size: 15px;
+    }
+    .header span{
+        font-size: 12px;
+    }
+}

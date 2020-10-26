@@ -48,3 +48,59 @@ body{
 .Cal__Day__highlighted:before {
   background-color: rgb(73, 194, 73) !important;
 }
+
+
+@media screen and (max-width: 1024px){
+    .menu{
+      width: 25%;
+    }
+    .wrap-content{
+      padding-right: 40px;
+      width: calc(80% - 80px);
+    }
+}
+@media screen and (max-width: 568px){
+    .menu{
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 10000;
+      width: 0;
+      width: 0;
+    }
+    .main{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wrap-content{
+      padding: 0;
+      width: 85%;
+    }
+    .Cal__Day__highlighted:before {
+      top: 66% !important;
+      left: 74% !important;
+      width: 32px !important;
+      height: 32px !important;
+    }
+    .Cal__Day__root.Cal__Day__selected .Cal__Day__selection{
+      top: 66% !important;
+      left: 74% !important;
+      width: 32px !important;
+      height: 32px !important;
+    }
+    .Cal__Day__root.Cal__Day__selected .Cal__Day__selection .Cal__Day__month {
+      display: none !important;
+    }
+    .Cal__Day__root.Cal__Day__selected .Cal__Day__selection .Cal__Day__day {
+      top: -11px !important;
+    }
+}
+@media screen and (max-width: 375px){
+  .main{
+    height: calc(100% - 50px);
+  }
+  .footer{
+    height: 50px;
+  }
+}
