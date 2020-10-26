@@ -1,6 +1,5 @@
 let passwordHash = require('password-hash');
 const jwt = require('jsonwebtoken');
-const keys = require('../config/keys');
 const errorHandler = require('../utils/errorHandler');
 const ObjectId = require('mongoose').Types.ObjectId;
 const User = require('../models/user');
