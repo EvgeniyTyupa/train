@@ -1,9 +1,11 @@
 APP Fit-Trainer.
-Приложение для создания тренировок.
+Application for creating workouts.
 
-Для того, что-бы развернуть приложение нужно:
-- в консоли, из 2 папок, front и back, прописать команду npm install.
-- в папке back создать папку config и создать в ней файл keys.js
+ReactJS + Node.JS + MongoDB
+
+In order to deploy the application you need:
+- in the console, from 2 folders, front and back, write the npm install command.
+- in the back folder, create a config folder and create a keys.js file in it
   
-Запуск приложения: 
-- в консоли, из 2 папок, front и back, прописать команду npm start.
+Application launch:
+- in the console, from 2 folders, front and back, write the npm start command.
