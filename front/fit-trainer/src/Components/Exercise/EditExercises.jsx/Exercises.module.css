@@ -1,0 +1,75 @@
+.main{
+    width: 100%;
+}
+.main h1{
+    margin-block-end: 0;
+    margin-block-start: 0;
+    margin-top: 25px;
+    font-weight: 400;
+    color: #999999;
+    font-size: 24px;
+}
+.window{
+    margin-top: 70px;
+    width: calc(85% - 40px);
+    height: calc(100% - 15px);
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 1px 14px -8px black;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 15px;
+}
+.windowBut{
+    outline: none;
+    cursor: pointer;
+    color: white;
+    border: none;
+    background-color: #ae0aae;
+    padding: 15px 30px;
+    border-radius: 3px;
+    margin-bottom: 60px;
+    transition-duration: 0.3s;
+}
+.windowBut:hover{
+    background-color: #a00aa0;
+}
+.window form{
+    margin-top: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 15px;
+    height: calc(70% - 15px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    
+}
+
+.submitBut{
+    outline: none;
+    cursor: pointer;
+    color: white;
+    border: none;
+    background-color: #ae0aae;
+    padding: 15px 30px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    transition-duration: 0.3s;
+    margin-top: 40px;
+}
+.submitBut:hover{
+    background-color: #a00aa0;
+}
+.content{
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 45vh;
+}
+@media screen and (max-width: 768px){
+    .window{
+        width: calc(100% - 40px);
+    }
+}
